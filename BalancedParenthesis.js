@@ -1,14 +1,15 @@
 /* ------------------------------------------------------------------------------------------
 -- Balanced Parenthesis --
-passed in a string, this function should determine if the provided expression has valid ()/[]/{}.  The string can contain any number of leters and numbers.
+passed in a string, this function should determine if the provided expression has valid ()/[]/{} open closings.  The string can contain any number of leters and numbers.
 
 -- Exampeles --
-'(39285ajbl)'   // true
-'[(({[[[]]]}))]'  // true
-'[](0sfdg)'  // true
-'[(])' // false
-'{[([)]}]'  // false
-']()' // false
+Balanced( '[' )               // false
+Balanced( '(39285ajbl)' )     // true
+Balanced( '[(({[[[]]]}))]' )  // true
+Balanced( '[](0sfdg)' )       // true
+Balanced( '[(])' )            // false
+Balanced( '{[([)]}]' )        // false
+Balanced( ']()' )             // false
 
 ------------------------------------------------------------------------------------------ */
 
