@@ -12,3 +12,20 @@ firstNonRepeatedCharacter('ALAMABA');   // L
 firstNonRepeatedCharacter('BaBa');   // sorry
 
 -----------------------------------------------------------------*/
+function firstNonRepeatedCharacter (string) {
+  var collection = {};
+
+  for(var i = 0; i < string.length; i++){
+    if(collection[string[i]]){
+      collection[string[i]]++;
+    }else{
+      collection[string[i]]=1;
+    }
+  }
+  console.log(collection);
+
+  for(var j = 0; j < string.length; j++){
+    if(collection[string[j]]===1){return string[j]};
+  }
+  return "sorry"
+}
