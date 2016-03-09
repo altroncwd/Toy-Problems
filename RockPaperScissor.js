@@ -37,3 +37,28 @@ function rockPaperPermutation (roundCount) {
 
   return rps;
 }
+
+// -------------- Slight diffrent solutions -----------------
+
+var rockPaperScissor = function (rounds) {
+  if (rounds === 0) {
+    return [];
+  }
+  var startingList = ['r', 'p', 'c'];
+
+  var combinations = function (list) {
+    rounds--;
+    var newList = [];
+    for( var i = 0; i < list.length; i++) {
+        for( var j = 0; j < startingList.length; j++) {
+            newList.push(list[i] + startingList[j]);
+        }
+    }
+    if(rounds > 0) {
+        return combinations(newList);
+    } else {
+        return newList;
+    }
+  };
+  return combinations(['']);
+};
