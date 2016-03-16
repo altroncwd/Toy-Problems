@@ -63,3 +63,29 @@ Given the example above, we need to add two methods to this prototype.
 
 
 --------------------------------------------------------------------------- */
+
+// NOTE : you'll want to do getAncestorPath first to use in getClosestCommonAncestor
+Tree.prototype.getAncestorPath = function(target){
+  if (this === target) {return [this]}
+  for (var i = 0; i < this.children.length; i++) {
+    var childPath = this.children[i].getAncestorPath(target) // this will end up returning an array list, or null in the case that the target path was never found
+    if ( childPath ) {   // by checking to see if childPath is true, we know to keep going
+      return [this].concat(childPath);  // we then return the current object in an array, and concat.  This will go alway the way down to the target, and then contact the list going up untill the inital invocation
+    }
+  }
+  return null;      // finaly a safety return for in the case we found nothing
+}
+
+Tree.prototype.getClosestCommonAncestor = function(target1, target2){
+  var list1 = this.getAncestorPath(target1);  // we generate two lists to be able to compare
+  var list2 = this.getAncestorPath(target2);
+  if (list1 === null || list2 === null) {     // if either list is null, meaning the targets were never found, then we return null because it cannot have a common ancestor
+    return null;
+  }
+  var closest = this;     // we know to start the the current object is an ancestor
+  for (var i = 0; i <list1.length; i++) {         // we go through our list, doesnt matter which list we use as the length;
+    if (!list1[i] || !list2[i]){ return closest}  // here if while we go through a list, if one list ends and returns an undefined value, we know thats the end, so we can return the closest ancestor
+    if (list1[i] === list2[i]) { closest = list1[i]; }  // here if the lists are the same ancestor we set that to the new closest.
+  }
+  return closest;  // finaly assumeing we get through the list we return the closest
+}
