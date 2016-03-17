@@ -19,4 +19,26 @@ var DIGIT_VALUES = {
   M: 1000
 };
 
-// End of helpers
+// End of helpers -----------------------------------------------------------
+
+function translateRomanNumeral (romanNumeral) {
+  var currentValue = 0;
+  var lastValue;
+  for (var i = 0; i < romanNumeral.length; i++) {
+    if (DIGIT_VALUES[romanNumeral[i]] === undefined) {  // here at any point we run into a non roman numeral, we break out of the function returning 'null'
+      return 'null';
+    }
+    if (DIGIT_VALUES[romanNumeral[i]] > lastValue) {
+      // at this step we need to make sure to remove the last value twice, as it was added initialy in the last itteration
+      currentValue += (DIGIT_VALUES[romanNumeral[i]] - lastValue * 2);
+    } else {
+      // here we simply add to the current value
+      currentValue += DIGIT_VALUES[romanNumeral[i]];
+    }
+    // and now we update the last value
+    lastValue = DIGIT_VALUES[romanNumeral[i]];
+  }
+
+  return currentValue;
+
+}
